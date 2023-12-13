@@ -25,6 +25,7 @@ function checkDigits(digits, tabName) {
         showCongratulations(tabName);
     } else {
         showAlert('Try again!', tabName);
+        showAlert('hint: addition of numbers', tabName);
     }
 }
 
@@ -55,9 +56,8 @@ function showAlert(message, tabName) {
                     '</div>';
     setTimeout(function() {
         tab.innerHTML = '';
-        // Reset tab content after animation
         setupTabContent(tabName);
-    }, 1500); // Display the alert for 3 seconds
+    }, 2000); // Display the alert for 2 seconds
 }
 
 // Setup tab content after the congratulations or alert message
