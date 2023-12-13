@@ -32,8 +32,8 @@ function checkDigits(digits, tabName) {
 function showCongratulations(tabName) {
     var tab = document.getElementById(tabName);
     tab.innerHTML = '<div class="animate__animated animate__zoomIn">' +
-                    'Congratulations!<br>' +
-                    'Thala for a reason' +
+                    'You Guessed It Correct!<br>' +
+                    'Thala for a reason❤' +
                     '</div>';
     
     // Play the success sound
