@@ -77,7 +77,7 @@ function setupTabContent(tabName) {
                                                       '<button onclick="checkThreeDigits()">Submit</button>';
     }
     else if(tabName === 'anyWord') {
-        document.getElementById(tabName).innerHTML = '<input type="text" id="word"               placeholder="Type the Lucky word">' +
+        document.getElementById(tabName).innerHTML = '<input type="text" id="word"               placeholder="Type the Lucky word/number">' +
         '<button onclick="checkWord()">Submit</button>';
     }
 }
