@@ -22,7 +22,7 @@ function checkDigits(digits, tabName) {
     var sum = digits.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0);
     
     if (sum === 7) {
-        showCongratulations(tabName);
+        showCongratulations("",tabName);
     } else {
         showAlert('Try again!', tabName);
         showAlert('hint: addition of numbers', tabName);
@@ -30,11 +30,12 @@ function checkDigits(digits, tabName) {
 }
 
 // Function to show congratulations message
-function showCongratulations(tabName) {
+function showCongratulations(message , tabName) {
     var tab = document.getElementById(tabName);
     tab.innerHTML = '<div class="animate__animated animate__zoomIn">' +
-                    'You Guessed It Correct!<br>' +
-                    'Thala for a reason❤' +
+                    'You Guessed It Correct!<br>' + message +
+                    ' Thala for a reason ❤' +
+                    '<br> <img src="./200.gif" alt="Thala-Gif" height="200" width="200"> '
                     '</div>';
     
     // Play the success sound
@@ -45,7 +46,7 @@ function showCongratulations(tabName) {
         tab.innerHTML = '';
         // Reset tab content after animation
         setupTabContent(tabName);
-    }, 5000); // Display the message for 5 seconds
+    }, 10000); // Display the message for 5 seconds
 }
 
 // Function to show alert message
@@ -75,6 +76,10 @@ function setupTabContent(tabName) {
                                                       '<input type="text" id="digitThree" placeholder="Third number">' +
                                                       '<button onclick="checkThreeDigits()">Submit</button>';
     }
+    else if(tabName === 'anyWord') {
+        document.getElementById(tabName).innerHTML = '<input type="text" id="word"               placeholder="Type the Lucky word">' +
+        '<button onclick="checkWord()">Submit</button>';
+    }
 }
 
 // Event listeners for the submit buttons
@@ -88,10 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('threeDigitsTab').addEventListener('click', function() {
         showTab('threeDigits');
     });
+    document.getElementById('anyWordTab').addEventListener('click', function() {
+        showTab('anyWord');
+    });
 
     setupTabContent('oneDigit');
     setupTabContent('twoDigits');
     setupTabContent('threeDigits');
+    setupTabContent('anyWord')
 });
 
 // Functions to check digits on submit
@@ -111,4 +120,25 @@ function checkThreeDigits() {
     var digitTwo = document.getElementById('digitTwo').value;
     var digitThree = document.getElementById('digitThree').value;
     checkDigits([digitOne, digitTwo, digitThree], 'threeDigits');
+}
+
+function checkWord() {
+    var word = document.getElementById('word').value;
+    var flag = 0;
+    if (isNaN(word)) {
+        flag += word.length;
+    }
+    else {
+        for(let i = 0; i<word.length; i++){
+            flag += parseInt(word.charAt(i)) ;
+        }
+        console.log(flag);
+    }
+    
+    if (flag === 7) {
+        showCongratulations(word , 'anyWord');
+    }
+    else{
+        showAlert ('Not the lucky number','anyWord')
+    }
 }
