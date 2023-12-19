@@ -17,8 +17,34 @@ function showTab(tabName) {
     document.getElementById(tabName + "Tab").className += " active";
 }
 
+
+
+// Fuction to check if String is of length() == 7 or some custom inputs by contributor/developer
+//plz do not remove the custom inputs of contributors or developers as they are surprised element by luck
+function checkYourName() {
+    var name = document.getElementById('yourNameInput').value.toLowerCase();
+    if (name === "thalla" || name === "dhoni bhai" || name  === "soham" || name  === "chetan" || name === "mahindrasinghdhoni" || name === "ipl2024winner" || name === "csk" || name === "mahi bhai" || name === "mahibhai") {
+      showmrJayantCongratulations('yourName');
+    } else if (name.length === 7) {
+      showmrJayantCongratulations('yourName'); 
+    } else {
+      showAlert('bro what are you doing? 😒', 'yourName');
+    }
+  }
+  
+  
 // Function to check if the number(s) sum to 7
 function checkDigits(digits, tabName) {
+    var sum = digits.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0);
+    
+    if (sum === 7) {
+        showCongratulations(tabName);
+    } else {
+        showAlert('Try again!', tabName);
+        // showAlert('hint: addition of numbers', tabName);
+    }
+}
+function checkDigits2(digits, tabName) {
     var sum = digits.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0);
     
     if (sum === 7) {
@@ -29,12 +55,53 @@ function checkDigits(digits, tabName) {
     }
 }
 
+
+// Function to show alert message
+function showAlert(message, tabName) {
+    var tab = document.getElementById(tabName);
+    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
+                    message +
+                    '</div>';
+    setTimeout(function() {
+        tab.innerHTML = '';
+        setupTabContent(tabName);
+    }, 2000); // Display the alert for 2 seconds
+}
+
+
+// Function to show congratulations message if and only if it is a string
+function showmrJayantCongratulations(tabName) {
+    var name = document.getElementById('yourNameInput').value;
+    var message = name.split("").join(" + ") +  " " + '<div class="animate__animated animate__zoomIn">' +
+    'You Guessed It Correct My Friend!<br>' +
+    " <span style='color: red;'>Thala for a reason ❤</span>"  +
+    '</div>';
+    
+    var tab = document.getElementById(tabName);
+    tab.innerHTML = '<div class="animate__animated animate__zoomIn">' +
+                    message +
+                    '</div>';
+    
+    // Play the success sound
+    var sound = document.getElementById('success-sound-name');
+    sound.play();
+
+    setTimeout(function() {
+        tab.innerHTML = '';
+        // Reset tab content after animation
+        setupTabContent(tabName);
+    }, 7000); // Display the message for 7  seconds obviously "Thalla For A Reason"
+  }
+  
+
+
 // Function to show congratulations message
 function showCongratulations(tabName) {
     var tab = document.getElementById(tabName);
     tab.innerHTML = '<div class="animate__animated animate__zoomIn">' +
                     'You Guessed It Correct!<br>' +
-                    'Thala for a reason❤' +
+                    " <span style='color: red;'>Thala for a reason ❤</span>" 
+                    
                     '</div>';
     
     // Play the success sound
@@ -48,17 +115,6 @@ function showCongratulations(tabName) {
     }, 5000); // Display the message for 5 seconds
 }
 
-// Function to show alert message
-function showAlert(message, tabName) {
-    var tab = document.getElementById(tabName);
-    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
-                    message +
-                    '</div>';
-    setTimeout(function() {
-        tab.innerHTML = '';
-        setupTabContent(tabName);
-    }, 2000); // Display the alert for 2 seconds
-}
 
 // Setup tab content after the congratulations or alert message
 function setupTabContent(tabName) {
@@ -75,6 +131,11 @@ function setupTabContent(tabName) {
                                                       '<input type="text" id="digitThree" placeholder="Third number">' +
                                                       '<button onclick="checkThreeDigits()">Submit</button>';
     }
+    else if (tabName === 'yourName') {
+          document.getElementById(tabName).innerHTML = '<input type="text" id="yourNameInput" placeholder="Enter your name">' +
+                                                       '<button onclick="checkYourName()">Submit</button>';
+    }
+      
 }
 
 // Event listeners for the submit buttons
@@ -103,12 +164,12 @@ function checkOneDigit() {
 function checkTwoDigits() {
     var firstDigit = document.getElementById('firstDigit').value;
     var secondDigit = document.getElementById('secondDigit').value;
-    checkDigits([firstDigit, secondDigit], 'twoDigits');
+    checkDigits2([firstDigit, secondDigit], 'twoDigits');
 }
 
 function checkThreeDigits() {
     var digitOne = document.getElementById('digitOne').value;
     var digitTwo = document.getElementById('digitTwo').value;
     var digitThree = document.getElementById('digitThree').value;
-    checkDigits([digitOne, digitTwo, digitThree], 'threeDigits');
+    checkDigits2([digitOne, digitTwo, digitThree], 'threeDigits');
 }
