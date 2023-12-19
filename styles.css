@@ -48,10 +48,8 @@ h1 {
 }
 .alert-messages {
     display: flex;
-    justify-content: center;
-    /* Centers the messages horizontally */
-    align-items: center;
-    /* Centers the messages vertically */
+    flex-direction: column;  /* Stack messages vertically */
+    align-items: center;     /* Center messages horizontally */
 }
 
 .alert-messages span {

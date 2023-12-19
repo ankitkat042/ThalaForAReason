@@ -24,11 +24,11 @@ function checkDigits(digits, tabName) {
     if (sum === 7) {
         showCongratulations(tabName);
     } else {
-        showAlert('Try again!', tabName);
+        showAlert(['Try again!'], tabName);
         // Only show hint if the number of inputs taken is more than 1
         if (digits.length > 1) {
-            showAlert('Try again!', tabName);
-            showAlert('hint: addition of numbers', tabName);
+          
+            showAlert(['Try again!', 'hint: addition of numbers'], tabName);
         }
         // showAlert('hint: addition of numbers', tabName);
     }
@@ -61,6 +61,10 @@ function showAlert(messages, tabName) {
     // Create content for each message
     for (var i = 0; i < messages.length; i++) {
         content += '<span class="animate__animated animate__shakeX">' + messages[i] ;
+
+        if (i < messages.length - 1) {
+            content += '<br>';
+        }
     }
     
     content += '</div>';
