@@ -40,6 +40,7 @@ h1 {
     background-color: grey;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+
 }
 
 .tab.active, .tab:hover {
