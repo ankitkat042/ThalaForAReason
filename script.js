@@ -20,9 +20,10 @@ function showTab(tabName) {
 
 
 // Fuction to check if String is of length() == 7 or some custom inputs by contributor/developer
+//plz do not remove the custom inputs of contributors or developers as they are surprised element by luck
 function checkYourName() {
     var name = document.getElementById('yourNameInput').value.toLowerCase();
-    if (name === "thalla" || name === "dhoni bhai" || name === "mahindrasinghdhoni" || name === "ipl2024winner" || name === "csk" || name === "mahi bhai" || name === "mahibhai") {
+    if (name === "thalla" || name === "dhoni bhai" || name  === "soham" || name  === "chetan" || name === "mahindrasinghdhoni" || name === "ipl2024winner" || name === "csk" || name === "mahi bhai" || name === "mahibhai") {
       showmrJayantCongratulations('yourName');
     } else if (name.length === 7) {
       showmrJayantCongratulations('yourName'); 
@@ -47,9 +48,9 @@ function checkDigits(digits, tabName) {
 // Function to show congratulations message if and only if it is a string
 function showmrJayantCongratulations(tabName) {
     var name = document.getElementById('yourNameInput').value;
-    var message = name.split("").join(" + ")  + '<div class="animate__animated animate__zoomIn">' +
+    var message = name.split("").join(" + ") +  " " + '<div class="animate__animated animate__zoomIn">' +
     'You Guessed It Correct My Friend!<br>' +
-    'Thala for a reason ❤' +
+    " <span style='color: red;'>Thala for a reason ❤</span>"  +
     '</div>';
     
     var tab = document.getElementById(tabName);
@@ -65,7 +66,7 @@ function showmrJayantCongratulations(tabName) {
         tab.innerHTML = '';
         // Reset tab content after animation
         setupTabContent(tabName);
-    }, 5000); // Display the message for 5 seconds
+    }, 7000); // Display the message for 7  seconds obviously "Thalla For A Reason"
   }
   
 

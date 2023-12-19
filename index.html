@@ -14,20 +14,20 @@
     <div id="container">
         <h1>Thala For A Reason</h1>
         <div id="tabs">
-            <button class="tab" onclick="showTab('yourName')">Your Name</button>
-            <button class="tab active" onclick="showTab('oneDigit')">One Digit</button>
+            <button class="tab active" onclick="showTab('yourName')">Name </button>
+            <button class="tab " onclick="showTab('oneDigit')">One Digit</button>
             <button class="tab" onclick="showTab('twoDigits')">Two Digits</button>
             <button class="tab" onclick="showTab('threeDigits')">Three Digits</button>
         </div>
 
 
 
-        <div id="yourName" class="tabContent" style="display: none;">
-            <input type="text" id="yourNameInput" placeholder="Enter your name">
+        <div id="yourName" class="tabContent" >
+            <input type="text" id="yourNameInput" placeholder="Just type here">
             <button onclick="checkYourName()">Submit</button>
         </div>
 
-        <div id="oneDigit" class="tabContent">
+        <div id="oneDigit" class="tabContent" style="display: none;">
             <input type="text" id="singleDigit" placeholder="Type the Lucky number">
             <button onclick="checkOneDigit()">Submit</button>
         </div>
