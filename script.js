@@ -26,7 +26,7 @@ function checkDigits(digits, tabName) {
     } else {
         showAlert('Try again!', tabName);
         if (digits.length > 1) {
-            
+            showAlert('Try again!', tabName);
             showAlert('hint: addition of numbers', tabName);
         }
         // showAlert('hint: addition of numbers', tabName);
