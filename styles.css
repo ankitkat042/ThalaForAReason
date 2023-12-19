@@ -141,3 +141,14 @@ button:hover {
 
 }
 
+
+body {
+  font-family: 'roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+}
