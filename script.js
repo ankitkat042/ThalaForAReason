@@ -25,6 +25,7 @@ function checkDigits(digits, tabName) {
         showCongratulations(tabName);
     } else {
         showAlert('Try again!', tabName);
+        // Only show hint if the number of inputs taken is more than 1
         if (digits.length > 1) {
             showAlert('Try again!', tabName);
             showAlert('hint: addition of numbers', tabName);
