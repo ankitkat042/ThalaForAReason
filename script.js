@@ -25,7 +25,11 @@ function checkDigits(digits, tabName) {
         showCongratulations(tabName);
     } else {
         showAlert('Try again!', tabName);
-        showAlert('hint: addition of numbers', tabName);
+        if (digits.length > 1) {
+            
+            showAlert('hint: addition of numbers', tabName);
+        }
+        // showAlert('hint: addition of numbers', tabName);
     }
 }
 
@@ -49,16 +53,25 @@ function showCongratulations(tabName) {
 }
 
 // Function to show alert message
-function showAlert(message, tabName) {
+function showAlert(messages, tabName) {
     var tab = document.getElementById(tabName);
-    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
-                    message +
-                    '</div>';
+    var content = '<div class="alert-messages">';
+    
+    // Create content for each message
+    for (var i = 0; i < messages.length; i++) {
+        content += '<span class="animate__animated animate__shakeX">' + messages[i] ;
+    }
+    
+    content += '</div>';
+    
+    tab.innerHTML = content;
+    
     setTimeout(function() {
         tab.innerHTML = '';
         setupTabContent(tabName);
     }, 2000); // Display the alert for 2 seconds
 }
+
 
 // Setup tab content after the congratulations or alert message
 function setupTabContent(tabName) {
