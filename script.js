@@ -41,12 +41,11 @@ function showCongratulations(message , tabName) {
     // Play the success sound
     var sound = document.getElementById('success-sound');
     sound.play();
-
     setTimeout(function() {
         tab.innerHTML = '';
         // Reset tab content after animation
         setupTabContent(tabName);
-    }, 10000); // Display the message for 5 seconds
+    }, 20000); // Display the message for 20 seconds
 }
 
 // Function to show alert message
