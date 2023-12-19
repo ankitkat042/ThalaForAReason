@@ -41,9 +41,33 @@ function checkDigits(digits, tabName) {
         showCongratulations(tabName);
     } else {
         showAlert('Try again!', tabName);
+        // showAlert('hint: addition of numbers', tabName);
+    }
+}
+function checkDigits2(digits, tabName) {
+    var sum = digits.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0);
+    
+    if (sum === 7) {
+        showCongratulations(tabName);
+    } else {
+        showAlert('Try again!', tabName);
         showAlert('hint: addition of numbers', tabName);
     }
 }
+
+
+// Function to show alert message
+function showAlert(message, tabName) {
+    var tab = document.getElementById(tabName);
+    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
+                    message +
+                    '</div>';
+    setTimeout(function() {
+        tab.innerHTML = '';
+        setupTabContent(tabName);
+    }, 2000); // Display the alert for 2 seconds
+}
+
 
 // Function to show congratulations message if and only if it is a string
 function showmrJayantCongratulations(tabName) {
@@ -91,17 +115,6 @@ function showCongratulations(tabName) {
     }, 5000); // Display the message for 5 seconds
 }
 
-// Function to show alert message
-function showAlert(message, tabName) {
-    var tab = document.getElementById(tabName);
-    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
-                    message +
-                    '</div>';
-    setTimeout(function() {
-        tab.innerHTML = '';
-        setupTabContent(tabName);
-    }, 2000); // Display the alert for 2 seconds
-}
 
 // Setup tab content after the congratulations or alert message
 function setupTabContent(tabName) {
@@ -151,12 +164,12 @@ function checkOneDigit() {
 function checkTwoDigits() {
     var firstDigit = document.getElementById('firstDigit').value;
     var secondDigit = document.getElementById('secondDigit').value;
-    checkDigits([firstDigit, secondDigit], 'twoDigits');
+    checkDigits2([firstDigit, secondDigit], 'twoDigits');
 }
 
 function checkThreeDigits() {
     var digitOne = document.getElementById('digitOne').value;
     var digitTwo = document.getElementById('digitTwo').value;
     var digitThree = document.getElementById('digitThree').value;
-    checkDigits([digitOne, digitTwo, digitThree], 'threeDigits');
+    checkDigits2([digitOne, digitTwo, digitThree], 'threeDigits');
 }
