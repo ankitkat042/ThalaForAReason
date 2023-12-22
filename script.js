@@ -1,114 +1,131 @@
-// Function to show a tab
-function showTab(tabName) {
-    // Hide all tab content
-    var tabcontent = document.getElementsByClassName("tabContent");
-    for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    
-    // Remove 'active' class from all tabs
-    var tablinks = document.getElementsByClassName("tab");
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "block";
-    document.getElementById(tabName + "Tab").className += " active";
+const tabs = document.querySelectorAll('.tab');
+const tabContentContainers = document.querySelectorAll(".tabContent")
+const resultBox = document.querySelectorAll(".result-box")[0]
+const explanationContainer = document.querySelector('.explaination-container');
+const targetProduct = 7;
+
+
+// TAB HANDLER
+tabs.forEach(tab => { tab.addEventListener("click", handleTabClick) });
+function handleTabClick(event) {
+    // Remove all active tabs and tab-content
+    tabs.forEach(tab => { tab.classList.remove('active') });
+    tabContentContainers.forEach(item => { item.classList.remove('active') });
+
+    // Add active class on selected tabs and tab-content
+    event.target.classList.add('active');
+    const selectedTabContainer = document.getElementById(event.target.getAttribute('data-tab'));
+    selectedTabContainer.classList.add("active");
+
+    // Clear the explanation container
+    clearExplanationContainer();
 }
 
-// Function to check if the number(s) sum to 7
-function checkDigits(digits, tabName) {
-    var sum = digits.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0);
-    
-    if (sum === 7) {
-        showCongratulations(tabName);
+// =========================================================================
+// FUNCTION TO CONVERT ANY LENGTH OF INPUTED NUMBERS TO SUM UP TO 7
+// =========================================================================
+// Function to clear the explanation container
+function clearExplanationContainer() {
+    explanationContainer.innerHTML = '';
+}
+
+// Add paragraph to the explanation container
+async function addPara(text) {
+    const p = await document.createElement("p");
+    p.innerText = text;
+    await explanationContainer.appendChild(p);
+}
+
+// Handle Output at the end
+function handleResultOutput() {
+    resultBox.classList.remove("hidden")
+    // // Play the success sound
+    // var sound = document.getElementById('success-sound');
+    // sound.play();
+    setTimeout(() => {
+        resultBox.classList.add("hidden")
+    }, 5000);
+}
+
+
+// conditions
+async function meetInputConditions(numbers) {
+    if (numbers.length === 0) {
+        const msg = await 'Please enter at least one number.';
+        await alert(msg);
+        return await false;
+    } else if (numbers.some(item => isNaN(item))) {
+        await alert('Please enter numbers only.');
+        return await false;
+    }
+    return await true;
+};
+
+// get total of all numbers
+async function sumNumbers(arr) {
+    return await arr.reduce((a, b) => a + b, 0);
+}
+
+// handle number if it is less than 7
+async function handleLessThanSeven(num) {
+    const multiplier = await targetProduct / num;
+    await addPara(`If we multiply ${num} by ${multiplier.toFixed(2)}, \n the result we get is 7.`);
+    await handleResultOutput();
+    return await num * multiplier;
+}
+
+// handle number if it is greater than 7
+async function handleGreaterThanSeven(num) {
+    const divisor = await num / 7;
+    await addPara(`If we divide ${num} by ${divisor.toFixed(2)}, \n the result we get is 7.`);
+    await handleResultOutput();
+    return await num / divisor;
+}
+
+
+const getNumSeven = async (num) => {
+    if (num < 7) {
+        return await handleLessThanSeven(num);
+    } else if (num > 7) {
+        return await handleGreaterThanSeven(num);
     } else {
-        showAlert('Try again!', tabName);
-        showAlert('hint: addition of numbers', tabName);
+        return await handleResultOutput();
     }
 }
 
-// Function to show congratulations message
-function showCongratulations(tabName) {
-    var tab = document.getElementById(tabName);
-    tab.innerHTML = '<div class="animate__animated animate__zoomIn">' +
-                    'You Guessed It Correct!<br>' +
-                    'Thala for a reason❤' +
-                    '</div>';
-    
-    // Play the success sound
-    var sound = document.getElementById('success-sound');
-    sound.play();
+// HANDELING USER INPUT MUTATION TO GET NUMBER SEVEN
+async function mutateUserInput(numbers, tabId) {
+    clearExplanationContainer();
 
-    setTimeout(function() {
-        tab.innerHTML = '';
-        // Reset tab content after animation
-        setupTabContent(tabName);
-    }, 5000); // Display the message for 5 seconds
-}
+    // Check if the array meets input conditions
+    if (!await meetInputConditions(numbers)) { return; }
 
-// Function to show alert message
-function showAlert(message, tabName) {
-    var tab = document.getElementById(tabName);
-    tab.innerHTML = '<div class="animate__animated animate__shakeX">' +
-                    message +
-                    '</div>';
-    setTimeout(function() {
-        tab.innerHTML = '';
-        setupTabContent(tabName);
-    }, 2000); // Display the alert for 2 seconds
-}
-
-// Setup tab content after the congratulations or alert message
-function setupTabContent(tabName) {
-    if (tabName === 'oneDigit') {
-        document.getElementById(tabName).innerHTML = '<input type="text" id="singleDigit" placeholder="Type the Lucky number">' +
-                                                      '<button onclick="checkOneDigit()">Submit</button>';
-    } else if (tabName === 'twoDigits') {
-        document.getElementById(tabName).innerHTML = '<input type="text" id="firstDigit" placeholder="First number">' +
-                                                      '<input type="text" id="secondDigit" placeholder="Second number">' +
-                                                      '<button onclick="checkTwoDigits()">Submit</button>';
-    } else if (tabName === 'threeDigits') {
-        document.getElementById(tabName).innerHTML = '<input type="text" id="digitOne" placeholder="First number">' +
-                                                      '<input type="text" id="digitTwo" placeholder="Second number">' +
-                                                      '<input type="text" id="digitThree" placeholder="Third number">' +
-                                                      '<button onclick="checkThreeDigits()">Submit</button>';
+    // get total value of all the numbers
+    const sumNum = await sumNumbers(numbers);
+    if (sumNum !== targetProduct) {
+        addPara(`On adding all the numbers, we get ${sumNum}.`);
     }
+    await getNumSeven(sumNum);
 }
 
-// Event listeners for the submit buttons
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('oneDigitTab').addEventListener('click', function() {
-        showTab('oneDigit');
-    });
-    document.getElementById('twoDigitsTab').addEventListener('click', function() {
-        showTab('twoDigits');
-    });
-    document.getElementById('threeDigitsTab').addEventListener('click', function() {
-        showTab('threeDigits');
-    });
 
-    setupTabContent('oneDigit');
-    setupTabContent('twoDigits');
-    setupTabContent('threeDigits');
-});
 
-// Functions to check digits on submit
+
+// FUNCTIONS TO GET THE NUMBER SEVEN
 function checkOneDigit() {
-    var digit = document.getElementById('singleDigit').value;
-    checkDigits([digit], 'oneDigit');
+    const inputOne = document.getElementById('one-digit-i1').value;
+    mutateUserInput([parseInt(inputOne, 10)], 'oneDigit');
 }
 
 function checkTwoDigits() {
-    var firstDigit = document.getElementById('firstDigit').value;
-    var secondDigit = document.getElementById('secondDigit').value;
-    checkDigits([firstDigit, secondDigit], 'twoDigits');
+    const inputOne = document.getElementById('two-digit-i1').value;
+    const inputTwo = document.getElementById('two-digit-i2').value;
+    mutateUserInput([parseInt(inputOne, 10), parseInt(inputTwo, 10)], 'twoDigits');
 }
 
 function checkThreeDigits() {
-    var digitOne = document.getElementById('digitOne').value;
-    var digitTwo = document.getElementById('digitTwo').value;
-    var digitThree = document.getElementById('digitThree').value;
-    checkDigits([digitOne, digitTwo, digitThree], 'threeDigits');
+    const inputOne = document.getElementById('three-digit-i1').value;
+    const inputTwo = document.getElementById('three-digit-i2').value;
+    const inputThree = document.getElementById('three-digit-i3').value;
+    mutateUserInput([parseInt(inputOne, 10), parseInt(inputTwo, 10), parseInt(inputThree, 10)], 'threeDigits');
 }
