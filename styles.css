@@ -1,154 +1,209 @@
+:root {
+    --bg: #FAFAFA;
+    --bg-light: #FAFAFA;
+
+    --grey: #afafaf;
+
+    --white: #FFFFFA;
+    --black: #101010;
+
+    --light: #FAFAFA;
+    --dark: #303030;
+    /* primary */
+    --p: #3b82f6;
+    --safe: #22c55e;
+}
+
 body {
-    font-family: 'roboto', sans-serif;
-    background-color: #f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+    /* background: linear-gradient(135deg, #3498db, #9b59b6); */
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    background: rgb(254, 240, 138);
+    background: linear-gradient(149deg, rgba(254, 240, 138, 1) 0%, rgba(234, 179, 8, 1) 50%, rgba(202, 138, 4, 1) 100%);
+}
+
+/* =====================================================================================
+UTILITY
+======================================================================================== */
+input {
+    padding: .5rem .8rem;
+    outline: transparent;
+    border-radius: 4px;
+    border: 1px solid var(--grey);
+}
+
+input:focus {
+    outline: 2px solid var(--p);
+}
+
+
+.btn {
+    padding: .5rem .8rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
+    font-weight: 600;
+    text-transform: capitalize;
 
-#container {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 30%; /* You can adjust the width as needed */
-    border-radius: 10px;
-    background-color: white;
-    padding: 20px;
-    overflow: hidden; /* This ensures that nothing spills out of the container */
-}
-
-h1 {
-    color: #333;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
-#tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #dee2e6;
-}
-
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
     border: none;
-    background-color: grey;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.tab.active, .tab:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.tabContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    height: 250px; /* Fixed height for consistency */
-    overflow-y: auto; /* Adds scroll to the container if content overflows */
-}
-.tabContent input[type="text"] {
-    margin-bottom: 10px; /* Space between input boxes */
-}
-.tabContent button {
-    margin-top: 20px; /* Space above the submit button */
-}
-input[type="text"] {
-    margin: 0 5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-input[type="text"]:focus {
-    border-color: #007bff;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #28a745;
-    color: white;
+    background: transparent;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 4px;
+    outline: 1px solid var(--dark);
+    border: transparent;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #218838;
+.btn:focus {
+    outline: 2px solid var(--p);
 }
 
-#oneDigit, #twoDigits, #threeDigits {
-    padding: 10px;
-}
-#oneDigit input[type="text"],
-#twoDigits input[type="text"],
-#threeDigits input[type="text"] {
-    margin-right: 5px; /* Spacing between input fields */
-    margin-bottom: 5px; /* Spacing between input fields and the submit button */
-}
-#oneDigit button,
-#twoDigits button,
-#threeDigits button {
-    width: auto; /* Adjust width as necessary, or use auto for content-based width */
+h1 {
+    /* width: 100%; */
+    color: var(--dark);
+    text-align: center;
 }
 
+
+/* =====================================================================================
+CARD CONTAINER
+======================================================================================== */
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    padding: .5rem;
+    margin: 1rem;
+    width: 30%;
+    border-radius: .5rem;
+    background-color: var(--light);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+/* ================================
+TAB HEADER
+================================ */
+.tab-container {
+    padding: 1rem .2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--grey);
+    overflow-x: scroll;
+}
+
+.tab.active,
+.tab:hover {
+    background-color: var(--p);
+    color: var(--light);
+}
+
+/* ================================
+TAB BODY
+================================ */
+.tab-content-container {
+    padding: 1rem;
+}
+
+.tab-content-container .heading {
+    font-size: large;
+    font-weight: bold;
+}
+
+.tabContent {
+    padding: .5rem 0;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+}
+
+.tabContent.active {
+    display: flex;
+}
+
+.tabContent input {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.btn-submit {
+    width: fit-content;
+    margin: auto;
+}
+
+.btn-submit:hover {
+    background: var(--safe);
+    color: var(--light);
+}
+
+
+/* ================================
+EXPLAINATION CONTAINER
+================================ */
+.explaination-container {
+    padding: 1rem;
+    padding-top: 0;
+}
+
+
+/* ================================
+RESULT BOX
+================================ */
+.result-box {
+    position: relative;
+    display: block;
+}
+
+.result-box.hidden {
+    display: none;
+}
+
+.result-box .heading {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.result-container {
+    position: relative;
+    margin: 0 auto;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid var(--dark);
+    overflow: hidden;
+}
+
+
+.result-container .img-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-container .img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* RESPONSIVENESS  */
 @media only screen and (max-width: 768px) {
-    body {
-        align-items: flex-start;
-        padding-top: 20px;
+    .card {
+        width: 100%;
     }
 
-    #container {
-        width: 90%;
-        margin-top: 20px;
-    }
-
-    h1 {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        font-size: 1.5em;
-    }
-
-    .tabContent {
-        height: auto;
-    }
-
-    .tab {
-        font-size: 0.9em;
-    }
-    input[type="text"] {
-        width: 80%;
-    }
-    button {
-        width: auto;
-    }
     #link-icons {
         flex-direction: column;
-        gap: 10px; 
+        gap: 10px;
     }
 
-}
-
-
-body {
-  font-family: 'roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #3498db, #9b59b6);
 }
