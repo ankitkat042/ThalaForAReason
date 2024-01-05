@@ -46,7 +46,7 @@ function showCongratulations(tabName) {
     //show the confetti
 
     jsConfetti.addConfetti({
-        emojis: ['🕊️', '🐦', '🌸', 'Thala'],
+        emojis: ['🕊️', '🐦', '🌸', 'Thala', '7', '🎊', '✨', '⭐'],
     })
 
     
