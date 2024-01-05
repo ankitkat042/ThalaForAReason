@@ -1,3 +1,8 @@
+//confettei
+
+const jsConfetti = new JSConfetti();
+
+
 // Function to show a tab
 function showTab(tabName) {
     // Hide all tab content
@@ -36,6 +41,14 @@ function showCongratulations(tabName) {
                     'You Guessed It Correct!<br>' +
                     'Thala for a reason❤' +
                     '</div>';
+
+
+    //show the confetti
+
+    jsConfetti.addConfetti({
+        emojis: ['🕊️', '🐦', '🌸', 'Thala', '7', '🎊', '✨', '⭐'],
+    })
+
     
     // Play the success sound
     var sound = document.getElementById('success-sound');
