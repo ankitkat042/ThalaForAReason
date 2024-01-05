@@ -46,6 +46,16 @@ h1 {
     background-color: #007bff;
     color: white;
 }
+.alert-messages {
+    display: flex;
+    flex-direction: column;  /* Stack messages vertically */
+    align-items: center;     /* Center messages horizontally */
+}
+
+.alert-messages span {
+    margin: 1 5px;
+    /* Adds a small gap between messages */
+}
 
 .tabContent {
     display: flex;
